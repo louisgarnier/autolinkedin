@@ -1,0 +1,40 @@
+# Cursor AI Rules - Template Project
+
+## ⚠️ CRITICAL: READ THIS FIRST
+
+**BEFORE making ANY changes to code or creating files, you MUST:**
+
+1. **Read `docs/workflow/BEST_PRACTICES.md`** - This is MANDATORY
+2. **Check with the user** before:
+   - Writing or modifying code
+   - Creating new files (except documentation in `docs/`)
+   - Running commands that modify the codebase
+   - Committing or pushing to GitHub
+
+## Workflow Rules
+
+1. **Understand** - Ask clarifying questions if needed
+2. **Propose** - Explain what you'll do and why
+3. **Wait for approval** - Get explicit confirmation before proceeding
+4. **Implement** - Only after approval
+5. **Verify** - Check that changes work as expected
+
+## Testing Requirements
+
+After any code is developed:
+- **ALWAYS propose a test** in a `.py` file that can be run
+- Test should display logs in the terminal
+- User must be able to run the test
+
+## Documentation
+
+- Documentation files (`.md` files in `docs/`) can be created/updated without explicit approval
+- Code files require explicit approval before modification
+
+## Reference Files
+
+- **BEST_PRACTICES.md**: `docs/workflow/BEST_PRACTICES.md`
+- **GIT_WORKFLOW.md**: `docs/workflow/GIT_WORKFLOW.md`
+
+**These rules are non-negotiable. Always refer back to BEST_PRACTICES.md before making changes.**
+
