@@ -40,7 +40,7 @@ class PostGenerationService:
         
         logger.info("Post generation service initialized")
     
-    def generate_post(self, subject: str, max_tokens: int = 1000) -> str:
+    def generate_post(self, subject: str, max_tokens: int = 1000, min_length: int = 1200) -> str:
         """
         Generate a LinkedIn post from a subject.
         
@@ -75,6 +75,15 @@ class PostGenerationService:
                 # Step 3: Clean and parse response
                 logger.debug(f"Attempt {attempt}/{self.max_retries}: Cleaning response...")
                 cleaned_post = self._clean_post(generated_text)
+                
+                # Step 4: Validate length
+                if len(cleaned_post) < min_length:
+                    logger.warning(f"Post too short: {len(cleaned_post)} characters (minimum: {min_length})")
+                    if attempt < self.max_retries:
+                        logger.info(f"Retrying to generate longer post...")
+                        continue  # Retry to get a longer post
+                    else:
+                        logger.warning(f"Post is shorter than requested ({len(cleaned_post)} < {min_length} chars), but max retries reached")
                 
                 logger.info(f"✅ Post generated successfully ({len(cleaned_post)} characters)")
                 logger.debug(f"Generated post preview: {cleaned_post[:100]}...")

@@ -29,15 +29,16 @@ class OpenAIService:
         
         self.client = OpenAI(api_key=api_key)
         # Model selection: can be overridden via environment variable
-        # Default to gpt-3.5-turbo for cost efficiency (can use gpt-4 for production)
+        # Default to gpt-4 for quality (gpt-3.5-turbo doesn't follow length instructions well)
         model_from_env = os.getenv('OPENAI_MODEL')
         if model_from_env:
             self.model = model_from_env
         else:
-            self.model = "gpt-3.5-turbo"  # Cheaper for testing, can switch to gpt-4 for production
+            self.model = "gpt-4"  # Better quality and instruction following
+            logger.warning("Using gpt-4 by default. For cheaper testing, set OPENAI_MODEL=gpt-3.5-turbo in .env")
         logger.info(f"OpenAI service initialized with {self.model}")
     
-    def generate_post(self, prompt: str, max_tokens: int = 2000, temperature: float = 0.7) -> str:
+    def generate_post(self, prompt: str, max_tokens: int = 2500, temperature: float = 0.7) -> str:
         """
         Generate a LinkedIn post using OpenAI GPT-4.
         
@@ -74,6 +75,14 @@ CRITICAL FORMATTING RULES - MUST FOLLOW STRICTLY:
 
 CRITICAL ACCURACY RULE - ABSOLUTE PRIORITY:
 - FACTUAL ACCURACY: All factual, technical, legal, fiscal information MUST be TRUE and ACCURATE. Being divisive does NOT mean saying false things. You can take a strong stance, but ONLY with verified facts. If you're unsure about technical/legal/fiscal information, use cautious formulations ("maybe", "often", "generally") or avoid the claim. NEVER invent or oversimplify complex information.
+
+CRITICAL LENGTH RULE - MANDATORY - HIGHEST PRIORITY:
+- POST LENGTH: The post MUST be between 300-400 words MINIMUM (approximately 1500-2000 characters with spaces). 
+- A post with less than 300 words is UNACCEPTABLE and INCOMPLETE.
+- You MUST write multiple paragraphs, develop different angles, use examples, and provide deep reflections.
+- DO NOT STOP WRITING until you have reached at least 300 words (1500 characters).
+- Count your words/characters as you write. If you are below 300 words, continue writing.
+- This is a CRITICAL requirement - length is as important as content quality.
 
 The prompt contains detailed formatting instructions - follow them STRICTLY."""
             

@@ -32,7 +32,7 @@ Transformer une idée, un thème ou une phrase d'accroche en un post LinkedIn co
    - **EXEMPLE CORRECT** : "Beaucoup pensent partir. Ils veulent échapper au fisc." (9 mots) ✅
 
 2. **PARAGRAPHES ULTRA-COURTS** :
-   - **MAXIMUM 2 LIGNES PAR PARAGRAPHE** (pas 3, mais 2 maximum)
+   - **MAXIMUM 3 LIGNES PAR PARAGRAPHE** (pas 4, mais 3 maximum)
    - **SAUT DE LIGNE APRÈS CHAQUE 1-2 PHRASES**
    - **PAS DE BLOCS DE TEXTE** - Toujours aérer avec des sauts de ligne
 
@@ -61,7 +61,14 @@ Transformer une idée, un thème ou une phrase d'accroche en un post LinkedIn co
 
 1. Lis attentivement le sujet ci-dessous dans la section "Input" pour comprendre son contenu et son contexte.
 
-2. Créer un post LinkedIn entre 300 et 400 mots qui développe le thème de manière authentique et professionnelle.
+2. **LONGUEUR OBLIGATOIRE - CRITIQUE** : 
+   - Le post DOIT faire entre **300 et 400 mots** minimum
+   - Cela représente environ **1500-2000 caractères** (espaces inclus)
+   - **UN POST DE MOINS DE 250 MOTS EST INACCEPTABLE ET INCOMPLET**
+   - Tu DOIS développer le thème en profondeur avec plusieurs paragraphes
+   - Ne pas s'arrêter avant d'avoir atteint au moins 300 mots
+   - Utiliser plusieurs angles, exemples, réflexions pour atteindre cette longueur
+   - Développer le thème de manière authentique et professionnelle avec suffisamment de contenu
 
 3. Utiliser une structure claire : accroche percutante, développement avec des exemples concrets, et conclusion avec appel à l'action.
 
