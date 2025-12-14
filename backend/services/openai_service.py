@@ -28,10 +28,12 @@ class OpenAIService:
                 raise ValueError("OPENAI_API_KEY not found in environment variables")
         
         self.client = OpenAI(api_key=api_key)
-        self.model = "gpt-4"  # Using GPT-4 for better quality
-        logger.info("OpenAI service initialized with GPT-4")
+        # Use GPT-4 (can be changed to gpt-4-turbo or gpt-4o if available)
+        # Note: gpt-4-turbo-preview may not be available, using stable gpt-4
+        self.model = "gpt-4"  # Stable and reliable
+        logger.info(f"OpenAI service initialized with {self.model}")
     
-    def generate_post(self, prompt: str, max_tokens: int = 2000, temperature: float = 0.9) -> str:
+    def generate_post(self, prompt: str, max_tokens: int = 2000, temperature: float = 0.7) -> str:
         """
         Generate a LinkedIn post using OpenAI GPT-4.
         
@@ -53,15 +55,21 @@ class OpenAIService:
             logger.debug(f"Temperature: {temperature}")
             
             # Use system message to guide the model with strict formatting rules
-            system_message = """You are an elite LinkedIn copywriter. Generate original, unique posts based on the subject provided. Do NOT copy the examples - they are only for style reference.
+            system_message = """You are an elite LinkedIn copywriter specialized in French content. Generate original, unique posts in FRENCH based on the subject provided. Do NOT copy the examples - they are only for style reference.
 
-CRITICAL FORMATTING RULES - MUST FOLLOW:
-- SHORT SENTENCES: Maximum 15-20 words per sentence. One idea per sentence.
+LANGUAGE: You MUST write in FRENCH. All posts must be in French language.
+
+CRITICAL FORMATTING RULES - MUST FOLLOW STRICTLY:
+- ULTRA-SHORT SENTENCES: MAXIMUM 10-12 WORDS PER SENTENCE (not 15-20, but 10-12 MAX). One idea per sentence. If you have two ideas, make two sentences.
+- NO COMPLEX SENTENCES: No "and", "but", "because", "who", "that" that lengthen sentences. No relative clauses. Make separate sentences instead.
+- ULTRA-SHORT PARAGRAPHS: MAXIMUM 2 LINES PER PARAGRAPH (not 3, but 2 MAX). Line break after every 1-2 sentences. NO text blocks.
 - SIMPLE WORDS: Use common, everyday words. Avoid complex or technical terms.
 - ACTIVE VOICE: Always use active voice ("I did" not "It was done by me").
-- NO FILLER WORDS: Remove unnecessary words. Be direct and concise.
-- SHORT PARAGRAPHS: 2-3 lines maximum per paragraph. Use frequent line breaks.
+- NO FILLER WORDS: Remove unnecessary words. Be direct and concise. No "indeed", "furthermore", "after years of experience" - go straight to the point.
 - BE DIVISIVE: The post must create debate, provoke thought, take a clear stance. Don't be consensual. Dare to make strong statements that may divide opinions. Being divisive generates engagement and discussions.
+
+CRITICAL ACCURACY RULE - ABSOLUTE PRIORITY:
+- FACTUAL ACCURACY: All factual, technical, legal, fiscal information MUST be TRUE and ACCURATE. Being divisive does NOT mean saying false things. You can take a strong stance, but ONLY with verified facts. If you're unsure about technical/legal/fiscal information, use cautious formulations ("maybe", "often", "generally") or avoid the claim. NEVER invent or oversimplify complex information.
 
 The prompt contains detailed formatting instructions - follow them STRICTLY."""
             
@@ -72,7 +80,10 @@ The prompt contains detailed formatting instructions - follow them STRICTLY."""
                     {"role": "user", "content": prompt}
                 ],
                 max_tokens=max_tokens,
-                temperature=0.7,  # Lower temperature for better instruction following
+                temperature=temperature,  # 0.7 for better instruction following and accuracy
+                top_p=0.95,  # Nucleus sampling - helps with coherence (ChatGPT default)
+                frequency_penalty=0.1,  # Reduces repetition (ChatGPT uses similar)
+                presence_penalty=0.1,  # Encourages topic diversity
             )
             
             generated_text = response.choices[0].message.content.strip()
