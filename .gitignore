@@ -70,3 +70,12 @@ backups/
 *.pyo
 *.pyd
 
+# Google Sheets Service Account Keys
+**/service-account-key.json
+backend/config/service-account-key.json
+*.json
+!package.json
+!package-lock.json
+!tsconfig.json
+!jest.config.js
+!next.config.ts

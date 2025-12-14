@@ -41,20 +41,25 @@ The template includes:
 - ✅ Include examples and use cases
 - ✅ Reference related features
 
+## Current Features
+
+- **LINKEDIN_AUTOMATION_V1.md** - Automate posting a single LinkedIn post from Google Sheets
+
 ## Example Structure
 
 ```
 features/
 ├── README.md (this file)
-├── USER_AUTHENTICATION.md
+├── LINKEDIN_AUTOMATION_V1.md
 │   └── Implementation Plan:
-│       ├── Step 1: Database Schema
-│       ├── Step 2: Authentication API
-│       └── Step 3: Frontend Login
-└── USER_MANAGEMENT.md
-    └── Implementation Plan:
-        ├── Step 1: User Profile API
-        └── Step 2: Profile UI
+│       ├── Step 1: Project Setup & Dependencies
+│       ├── Step 2: Google Sheets Integration
+│       ├── Step 3: Configuration Management
+│       ├── Step 4: LinkedIn Browser Automation
+│       ├── Step 5: Scheduling System
+│       ├── Step 6: Main Application & Integration
+│       └── Step 7: Testing & Documentation
+└── [Future features...]
 ```
 
 ---

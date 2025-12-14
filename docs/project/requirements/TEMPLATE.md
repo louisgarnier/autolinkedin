@@ -81,10 +81,21 @@ Break down the functionality into clear, actionable steps. Each step should be c
 
 **Deliverables**:
 - What will be created/completed in this step
+- **Test script** (`.py` file) that can be executed to verify functionality
 
 **Acceptance Criteria**:
 - [ ] Criterion 1 - How to verify this step is complete
 - [ ] Criterion 2 - Specific, testable outcome
+- [ ] Test script runs successfully and displays logs
+- [ ] All tests pass
+
+**⚠️ IMPORTANT - Workflow Rules**:
+1. **NEVER** check [x] immediately after creating code
+2. **ALWAYS** create a test script (`.py` file) after code is written
+3. **ONLY** check [x] after:
+   - Test script has been created
+   - Test script has been executed and shows successful results
+   - User confirms the step is complete
 
 **Estimated Time**: [e.g., 4-6 hours]
 
