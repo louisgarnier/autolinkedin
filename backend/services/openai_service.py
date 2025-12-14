@@ -28,9 +28,13 @@ class OpenAIService:
                 raise ValueError("OPENAI_API_KEY not found in environment variables")
         
         self.client = OpenAI(api_key=api_key)
-        # Use GPT-4 (can be changed to gpt-4-turbo or gpt-4o if available)
-        # Note: gpt-4-turbo-preview may not be available, using stable gpt-4
-        self.model = "gpt-4"  # Stable and reliable
+        # Model selection: can be overridden via environment variable
+        # Default to gpt-3.5-turbo for cost efficiency (can use gpt-4 for production)
+        model_from_env = os.getenv('OPENAI_MODEL')
+        if model_from_env:
+            self.model = model_from_env
+        else:
+            self.model = "gpt-3.5-turbo"  # Cheaper for testing, can switch to gpt-4 for production
         logger.info(f"OpenAI service initialized with {self.model}")
     
     def generate_post(self, prompt: str, max_tokens: int = 2000, temperature: float = 0.7) -> str:
@@ -49,7 +53,7 @@ class OpenAIService:
             Exception: If API call fails
         """
         try:
-            logger.info("Calling OpenAI GPT-4 API to generate post...")
+            logger.info(f"Calling OpenAI {self.model} API to generate post...")
             logger.debug(f"Model: {self.model}")
             logger.debug(f"Max tokens: {max_tokens}")
             logger.debug(f"Temperature: {temperature}")
@@ -104,7 +108,7 @@ The prompt contains detailed formatting instructions - follow them STRICTLY."""
             True if connection successful, False otherwise
         """
         try:
-            logger.info("Testing OpenAI GPT-4 API connection...")
+            logger.info(f"Testing OpenAI {self.model} API connection...")
             response = self.client.chat.completions.create(
                 model=self.model,
                 messages=[

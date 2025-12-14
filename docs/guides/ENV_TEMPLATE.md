@@ -30,6 +30,9 @@ LOG_LEVEL=INFO
 
 # LinkedIn Automation V2 - OpenAI API
 OPENAI_API_KEY=your_openai_api_key_here
+# Optional: Model selection (default: gpt-3.5-turbo for testing, use gpt-4 for production)
+# OPENAI_MODEL=gpt-3.5-turbo
+# OPENAI_MODEL=gpt-4
 ```
 
 ## Instructions
