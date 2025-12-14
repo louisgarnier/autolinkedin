@@ -52,8 +52,17 @@ class OpenAIService:
             logger.debug(f"Max tokens: {max_tokens}")
             logger.debug(f"Temperature: {temperature}")
             
-            # Use system message to guide the model
-            system_message = "You are an elite LinkedIn copywriter. Generate original, unique posts based on the subject provided. Do NOT copy the examples - they are only for style reference."
+            # Use system message to guide the model with strict formatting rules
+            system_message = """You are an elite LinkedIn copywriter. Generate original, unique posts based on the subject provided. Do NOT copy the examples - they are only for style reference.
+
+CRITICAL FORMATTING RULES - MUST FOLLOW:
+- SHORT SENTENCES: Maximum 15-20 words per sentence. One idea per sentence.
+- SIMPLE WORDS: Use common, everyday words. Avoid complex or technical terms.
+- ACTIVE VOICE: Always use active voice ("I did" not "It was done by me").
+- NO FILLER WORDS: Remove unnecessary words. Be direct and concise.
+- SHORT PARAGRAPHS: 2-3 lines maximum per paragraph. Use frequent line breaks.
+
+The prompt contains detailed formatting instructions - follow them STRICTLY."""
             
             response = self.client.chat.completions.create(
                 model=self.model,
@@ -62,7 +71,7 @@ class OpenAIService:
                     {"role": "user", "content": prompt}
                 ],
                 max_tokens=max_tokens,
-                temperature=temperature,
+                temperature=0.7,  # Lower temperature for better instruction following
             )
             
             generated_text = response.choices[0].message.content.strip()

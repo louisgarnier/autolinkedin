@@ -14,22 +14,47 @@ Objectif du lecteur : mieux comprendre, mieux décider, mieux structurer sa traj
 
     <Instructions>
         <Instruction>Lis attentivement le sujet ci dessous "<Input>" pour comprendre son contenu et son contexte.</Instruction>
+        
+        <Instruction>
+        ⚠️ RÈGLES CRITIQUES DE FORMATAGE - À RESPECTER ABSOLUMENT :
+        
+        1. PHRASES COURTES OBLIGATOIRES :
+           - Maximum 15-20 mots par phrase
+           - Une seule idée par phrase
+           - Pas de phrases complexes avec plusieurs propositions
+           - Pas de phrases avec ":" ou ";" qui rallongent
+           
+        2. MOTS SIMPLES :
+           - Utiliser des mots du langage courant
+           - Éviter les mots compliqués ou techniques
+           - Préférer "faire" à "accomplir", "aider" à "faciliter"
+           
+        3. VOIX ACTIVE :
+           - Toujours utiliser la voix active
+           - "J'ai fait" pas "Il a été fait par moi"
+           - "Je décide" pas "Une décision a été prise"
+           
+        4. SANS MOTS SUPERFLUS :
+           - Supprimer tous les mots inutiles
+           - Pas de remplissage ("en effet", "par ailleurs", "il est important de noter que")
+           - Aller droit au but
+           
+        5. STRUCTURE :
+           - Accroche : 2-3 phrases courtes maximum
+           - Développement : phrases courtes, paragraphes de 2-3 lignes max
+           - Utiliser des sauts de ligne fréquents
+           - Bullet points si approprié
+        </Instruction>
+        
         <Instruction>Créer un post LinkedIn entre 150-300 mots qui développe le thème de manière authentique et professionnelle</Instruction>
         <Instruction>Utiliser une structure claire : accroche percutante, développement avec des exemples concrets, et conclusion avec appel à l'action</Instruction>
         <Instruction>Adopter un ton professionnel mais conversationnel, en utilisant "je" ou "nous" pour créer de la proximité</Instruction>
-        <Instruction>Analyse le texte par rapport aux règles d'un post viral :
-            - une accroche forte qui crée un mystère non résolu (en deux à trois phrases courtes),
-            - une idée par phrase, avec des mots simples
-            - des phrases courtes, à la voix active, sans mots superflus
-            - une conclusion qui inclut le lecteur dans la réflexion, sans nécessairement s'adresser directement à lui.
-            - une bonne lisibilité avec une structure variant des phrases courtes, des petits paragraphes, des bullet points</Instruction>
-        <Instruction>Ajouter des sauts de ligne pour faciliter la lecture (paragraphes courts)</Instruction>
-        <Instruction>"Trouver un angle narratif fort : une tension, un contraste ou une transformation (ex : “avant/après”, “échec/apprentissage”, “erreur/solution”)."</Instruction>
+        <Instruction>Trouver un angle narratif fort : une tension, un contraste ou une transformation (ex : "avant/après", "échec/apprentissage", "erreur/solution").</Instruction>
         <Instruction>Terminer avec une question ou un appel à l'action pour encourager les commentaires</Instruction>
         <Instruction>Éviter le jargon excessif et les clichés corporate ("thinking outside the box", "synergies", etc.)</Instruction>
         <Instruction>Ne pas inclure de hashtags dans le corps du texte (ils peuvent être ajoutés séparément si besoin)</Instruction>
         <Instruction>Tu peux modifier des mots si tu sens qu'un mot plus juste pourrait en remplacer un autre (par exemple "accomplir" au lieu de "réaliser", "développer" au lieu de "grandir")</Instruction>
-        <Instruction>Fournir un post Version Storytelling : met l’accent sur une anecdote, une expérience ou une émotion ou Version Insight : met l’accent sur une réflexion ou un apprentissage professionnel.</Instruction>
+        <Instruction>Fournir un post Version Storytelling : met l'accent sur une anecdote, une expérience ou une émotion ou Version Insight : met l'accent sur une réflexion ou un apprentissage professionnel.</Instruction>
         <Instruction>
         IMPORTANT: You must return ONLY the LinkedIn post text itself, without any XML tags, without any instructions, without any explanations, without repeating the prompt. 
         
