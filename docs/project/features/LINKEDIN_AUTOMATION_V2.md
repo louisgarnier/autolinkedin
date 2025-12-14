@@ -188,11 +188,11 @@
 **Description**: Create system to read and process prompt template
 
 **Tasks**:
-- [ ] Create `backend/prompts/` directory
-- [ ] Create `post_generation_template.txt` file (user provides content)
-- [ ] Implement prompt template reader
-- [ ] Implement placeholder replacement logic (inject subject)
-- [ ] Test template reading and replacement
+- [x] Create `backend/prompts/` directory
+- [x] Create `post_generation_template.txt` file (user provides content)
+- [x] Implement prompt template reader
+- [x] Implement placeholder replacement logic (inject subject)
+- [x] Test template reading and replacement
 
 **Dependencies**: None
 
