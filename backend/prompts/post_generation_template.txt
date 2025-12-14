@@ -46,10 +46,11 @@ Objectif du lecteur : mieux comprendre, mieux décider, mieux structurer sa traj
            - Bullet points si approprié
         </Instruction>
         
-        <Instruction>Créer un post LinkedIn entre 150-300 mots qui développe le thème de manière authentique et professionnelle</Instruction>
+        <Instruction>Créer un post LinkedIn entre 300 et 400 mots qui développe le thème de manière authentique et professionnelle</Instruction>
         <Instruction>Utiliser une structure claire : accroche percutante, développement avec des exemples concrets, et conclusion avec appel à l'action</Instruction>
         <Instruction>Adopter un ton professionnel mais conversationnel, en utilisant "je" ou "nous" pour créer de la proximité</Instruction>
         <Instruction>Trouver un angle narratif fort : une tension, un contraste ou une transformation (ex : "avant/après", "échec/apprentissage", "erreur/solution").</Instruction>
+        <Instruction>ÊTRE CLIVANT : Le post doit créer du débat, provoquer la réflexion, prendre position de manière assumée. Ne pas être consensuel. Oser des affirmations fortes qui peuvent diviser. C'est en étant clivant qu'on génère de l'engagement et des discussions.</Instruction>
         <Instruction>Terminer avec une question ou un appel à l'action pour encourager les commentaires</Instruction>
         <Instruction>Éviter le jargon excessif et les clichés corporate ("thinking outside the box", "synergies", etc.)</Instruction>
         <Instruction>Ne pas inclure de hashtags dans le corps du texte (ils peuvent être ajoutés séparément si besoin)</Instruction>

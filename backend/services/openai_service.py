@@ -61,6 +61,7 @@ CRITICAL FORMATTING RULES - MUST FOLLOW:
 - ACTIVE VOICE: Always use active voice ("I did" not "It was done by me").
 - NO FILLER WORDS: Remove unnecessary words. Be direct and concise.
 - SHORT PARAGRAPHS: 2-3 lines maximum per paragraph. Use frequent line breaks.
+- BE DIVISIVE: The post must create debate, provoke thought, take a clear stance. Don't be consensual. Dare to make strong statements that may divide opinions. Being divisive generates engagement and discussions.
 
 The prompt contains detailed formatting instructions - follow them STRICTLY."""
             
