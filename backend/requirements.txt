@@ -12,3 +12,6 @@ google-auth>=2.23.0
 playwright>=1.40.0
 python-dotenv>=1.0.0
 
+# LinkedIn Automation V2 dependencies
+openai>=1.0.0
+

@@ -27,6 +27,9 @@ BROWSER_MODE=visible
 # Logging
 LOG_LEVEL=INFO
 # Options: DEBUG, INFO, WARNING, ERROR
+
+# LinkedIn Automation V2 - OpenAI API
+OPENAI_API_KEY=your_openai_api_key_here
 ```
 
 ## Instructions
