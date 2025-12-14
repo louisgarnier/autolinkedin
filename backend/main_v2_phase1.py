@@ -64,8 +64,8 @@ def main():
         logger.info(f"✅ Subject read: '{subject}'")
         
         # Step 4: Generate post using OpenAI
-        logger.info("\n📋 STEP 4: Generating post using OpenAI GPT-4...")
-        logger.info("   This may take 10-30 seconds...")
+        logger.info("\n📋 STEP 4: Generating post using OpenAI...")
+        logger.info("   This may take a few seconds...")
         
         post_service = PostGenerationService()
         generated_post = post_service.generate_post(subject)
