@@ -1,13 +1,16 @@
 """
-Test script for Google Sheets Sheet2 integration (V2b - Step 4).
+Unit test for Google Sheets Sheet2 integration (V2b - Step 4).
 
-This test verifies:
+This test verifies the Google Sheets service methods:
 1. Can connect to Sheet2
 2. Can read subject from Row 2, Column A
 3. Can write post to Row 2, Column B
 4. Can set status to "yes" in Row 2, Column C
 5. Can read back the post and status
 6. Regeneration works (overwrite Column B)
+
+NOTE: This is a UNIT TEST that uses simple test strings.
+For INTEGRATION TEST with real post generation, see: test_phase1_integration.py
 """
 
 import sys
