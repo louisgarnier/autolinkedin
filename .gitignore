@@ -29,6 +29,10 @@ out/
 .env.test.local
 .env.production.local
 
+# Screenshots (debug files)
+screenshots/
+*.png
+
 # Database
 *.db
 *.sqlite

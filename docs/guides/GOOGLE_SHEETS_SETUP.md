@@ -33,7 +33,7 @@ For this automation project, we recommend using a **Service Account**.
 2. Click **Create Credentials** > **Service Account**
 3. Fill in:
    - **Service account name**: `linkedin-automation` (or any name)
-   - **Service account ID**: Auto-generated (or customize)
+   - **Service account ID**: linkedin-automation (or customize)
    - Click **Create and Continue**
 4. Skip the optional steps (Grant access, Grant users access) and click **Done**
 

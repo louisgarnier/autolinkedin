@@ -20,8 +20,7 @@ class GoogleSheetsService:
     # Column indices (1-based for gspread)
     COL_POST_TEXT = 1  # Column A
     COL_DATE = 2       # Column B
-    COL_HEURE = 3      # Column C
-    COL_POSTED = 4     # Column D
+    COL_POSTED = 3     # Column C
     
     # Header row
     HEADER_ROW = 1
@@ -84,7 +83,7 @@ class GoogleSheetsService:
             raise ValueError("Not connected to Google Sheets. Call connect() first.")
         
         try:
-            # Get all values in the posted column (Column D)
+            # Get all values in the posted column (Column C)
             posted_column = self.worksheet.col_values(self.COL_POSTED)
             
             # Start from row 2 (skip header)
@@ -109,7 +108,7 @@ class GoogleSheetsService:
             row_num: Row number (1-based)
             
         Returns:
-            Dictionary with keys: 'post_text', 'date', 'heure', 'posted'
+            Dictionary with keys: 'post_text', 'date', 'posted'
         """
         if not self.worksheet:
             raise ValueError("Not connected to Google Sheets. Call connect() first.")
@@ -121,13 +120,11 @@ class GoogleSheetsService:
             # Extract values (handle missing columns)
             post_text = row_values[self.COL_POST_TEXT - 1] if len(row_values) >= self.COL_POST_TEXT else ""
             date = row_values[self.COL_DATE - 1] if len(row_values) >= self.COL_DATE else ""
-            heure = row_values[self.COL_HEURE - 1] if len(row_values) >= self.COL_HEURE else ""
             posted = row_values[self.COL_POSTED - 1] if len(row_values) >= self.COL_POSTED else ""
             
             data = {
                 'post_text': post_text.strip(),
                 'date': date.strip(),
-                'heure': heure.strip(),
                 'posted': posted.strip().lower()
             }
             
@@ -171,26 +168,93 @@ class GoogleSheetsService:
             logger.error(f"Error parsing time '{time_str}': {e}")
             raise ValueError(f"Invalid time format. Expected HH:MM, got: {time_str}")
     
-    def update_post_status(self, row_num: int, status: str = "oui") -> None:
+    def update_post_status(self, row_num: int, status: str = "yes") -> None:
         """
         Update the posted status for a row.
         
         Args:
             row_num: Row number (1-based)
-            status: Status to set (default: "oui")
+            status: Status to set (default: "yes")
         """
         if not self.worksheet:
             raise ValueError("Not connected to Google Sheets. Call connect() first.")
         
         try:
-            # Update the posted column (Column D)
+            # Update the posted column (Column C)
+            # gspread.update() expects a list of lists
             cell_address = f"{self._column_letter(self.COL_POSTED)}{row_num}"
-            self.worksheet.update(cell_address, status)
+            self.worksheet.update(cell_address, [[status]])
             
             logger.info(f"Updated row {row_num} status to '{status}'")
             
         except Exception as e:
             logger.error(f"Error updating post status for row {row_num}: {e}")
+            raise
+    
+    def find_post_for_today(self) -> Optional[Dict]:
+        """
+        Find the first post where date matches today's date and posted = "no".
+        If multiple posts have the same date, returns the first one in the file.
+        
+        Returns:
+            Dictionary with post data including row_num, or None if no post found for today
+        """
+        if not self.worksheet:
+            raise ValueError("Not connected to Google Sheets. Call connect() first.")
+        
+        try:
+            from datetime import date
+            
+            today = date.today()
+            logger.info(f"Looking for post with date: {today.strftime('%d/%m/%Y')}")
+            
+            # Get all rows (starting from row 2, skip header)
+            all_rows = self.worksheet.get_all_values()
+            
+            # Start from row 2 (skip header)
+            for row_idx, row_values in enumerate(all_rows[1:], start=2):
+                try:
+                    # Extract values
+                    if len(row_values) < self.COL_POSTED:
+                        continue
+                    
+                    post_text = row_values[self.COL_POST_TEXT - 1].strip() if len(row_values) >= self.COL_POST_TEXT else ""
+                    date_str = row_values[self.COL_DATE - 1].strip() if len(row_values) >= self.COL_DATE else ""
+                    posted = row_values[self.COL_POSTED - 1].strip().lower() if len(row_values) >= self.COL_POSTED else ""
+                    
+                    # Skip if already posted
+                    if posted == "yes":
+                        continue
+                    
+                    # Skip if no date
+                    if not date_str:
+                        continue
+                    
+                    # Parse date and compare with today
+                    try:
+                        parsed_date = self.parse_date(date_str)
+                        if parsed_date.date() == today:
+                            logger.info(f"✅ Found post for today at row {row_idx}")
+                            return {
+                                'row_num': row_idx,
+                                'post_text': post_text,
+                                'date': date_str,
+                                'posted': posted
+                            }
+                    except ValueError:
+                        # Invalid date format, skip
+                        logger.debug(f"Row {row_idx} has invalid date format: {date_str}")
+                        continue
+                        
+                except Exception as e:
+                    logger.debug(f"Error processing row {row_idx}: {e}")
+                    continue
+            
+            logger.info("No post found for today")
+            return None
+            
+        except Exception as e:
+            logger.error(f"Error finding post for today: {e}")
             raise
     
     def get_next_unposted_post(self) -> Optional[Dict]:
