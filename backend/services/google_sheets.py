@@ -38,6 +38,7 @@ class GoogleSheetsService:
         self.client = None
         self.sheet = None
         self.worksheet = None
+        self.worksheet2 = None  # Sheet2 for V2
         
     def connect(self) -> None:
         """Connect to Google Sheets and open the worksheet."""
@@ -310,6 +311,170 @@ class GoogleSheetsService:
                 
         except Exception as e:
             logger.error(f"Error getting next unposted post: {e}")
+            raise
+    
+    # V2 Methods for Sheet2
+    def connect_sheet2(self) -> None:
+        """
+        Connect to Sheet2 for V2 functionality.
+        Must call connect() first to initialize client.
+        
+        Raises:
+            ValueError: If not connected to Google Sheets
+            Exception: If Sheet2 doesn't exist
+        """
+        if not self.client or not self.sheet:
+            raise ValueError("Not connected to Google Sheets. Call connect() first.")
+        
+        try:
+            # Get Sheet2 by name
+            self.worksheet2 = self.sheet.worksheet("Sheet2")
+            logger.info("✅ Connected to Sheet2")
+            
+        except gspread.exceptions.WorksheetNotFound:
+            logger.error("Sheet2 not found in Google Sheet")
+            raise ValueError("Sheet2 not found in Google Sheet")
+        except Exception as e:
+            logger.error(f"Error connecting to Sheet2: {e}")
+            raise
+    
+    def read_subject_from_sheet2(self) -> Optional[str]:
+        """
+        Read subject from Sheet2, Row 2, Column A.
+        
+        Returns:
+            Subject string, or None if empty/not found
+            
+        Raises:
+            ValueError: If not connected to Sheet2
+        """
+        if not self.worksheet2:
+            raise ValueError("Not connected to Sheet2. Call connect_sheet2() first.")
+        
+        try:
+            # Row 2, Column A (1-based indexing)
+            cell_value = self.worksheet2.cell(2, 1).value
+            
+            if not cell_value or not cell_value.strip():
+                logger.warning("Row 2, Column A is empty")
+                return None
+            
+            subject = cell_value.strip()
+            logger.info(f"✅ Read subject from Sheet2, Row 2: '{subject[:50]}...'")
+            return subject
+            
+        except Exception as e:
+            logger.error(f"Error reading subject from Sheet2: {e}")
+            raise
+    
+    def write_post_to_sheet2(self, post: str) -> None:
+        """
+        Write generated post to Sheet2, Row 2, Column B.
+        Overwrites existing value if present (regeneration support).
+        
+        Args:
+            post: Generated post text to write
+            
+        Raises:
+            ValueError: If not connected to Sheet2
+        """
+        if not self.worksheet2:
+            raise ValueError("Not connected to Sheet2. Call connect_sheet2() first.")
+        
+        if not post or not post.strip():
+            raise ValueError("Post cannot be empty")
+        
+        try:
+            # Row 2, Column B (1-based indexing)
+            cell_address = "B2"
+            self.worksheet2.update(cell_address, [[post.strip()]])
+            
+            logger.info(f"✅ Wrote post to Sheet2, Row 2, Column B ({len(post)} characters)")
+            
+        except Exception as e:
+            logger.error(f"Error writing post to Sheet2: {e}")
+            raise
+    
+    def set_post_generated_status(self, status: str = "yes") -> None:
+        """
+        Set post generated status in Sheet2, Row 2, Column C.
+        
+        Args:
+            status: Status to set (default: "yes")
+            
+        Raises:
+            ValueError: If not connected to Sheet2
+        """
+        if not self.worksheet2:
+            raise ValueError("Not connected to Sheet2. Call connect_sheet2() first.")
+        
+        try:
+            # Row 2, Column C (1-based indexing)
+            cell_address = "C2"
+            self.worksheet2.update(cell_address, [[status]])
+            
+            logger.info(f"✅ Set post generated status to '{status}' in Sheet2, Row 2, Column C")
+            
+        except Exception as e:
+            logger.error(f"Error setting post generated status: {e}")
+            raise
+    
+    def read_post_from_sheet2(self) -> Optional[str]:
+        """
+        Read generated post from Sheet2, Row 2, Column B.
+        
+        Returns:
+            Post text, or None if empty/not found
+            
+        Raises:
+            ValueError: If not connected to Sheet2
+        """
+        if not self.worksheet2:
+            raise ValueError("Not connected to Sheet2. Call connect_sheet2() first.")
+        
+        try:
+            # Row 2, Column B (1-based indexing)
+            cell_value = self.worksheet2.cell(2, 2).value
+            
+            if not cell_value or not cell_value.strip():
+                logger.warning("Row 2, Column B is empty")
+                return None
+            
+            post = cell_value.strip()
+            logger.info(f"✅ Read post from Sheet2, Row 2, Column B ({len(post)} characters)")
+            return post
+            
+        except Exception as e:
+            logger.error(f"Error reading post from Sheet2: {e}")
+            raise
+    
+    def get_post_generated_status(self) -> Optional[str]:
+        """
+        Get post generated status from Sheet2, Row 2, Column C.
+        
+        Returns:
+            Status string ("yes" or "no"), or None if empty
+            
+        Raises:
+            ValueError: If not connected to Sheet2
+        """
+        if not self.worksheet2:
+            raise ValueError("Not connected to Sheet2. Call connect_sheet2() first.")
+        
+        try:
+            # Row 2, Column C (1-based indexing)
+            cell_value = self.worksheet2.cell(2, 3).value
+            
+            if not cell_value:
+                logger.warning("Row 2, Column C is empty")
+                return None
+            
+            status = cell_value.strip().lower()
+            logger.info(f"✅ Read post generated status from Sheet2, Row 2, Column C: '{status}'")
+            return status
+            
+        except Exception as e:
+            logger.error(f"Error reading post generated status from Sheet2: {e}")
             raise
     
     @staticmethod

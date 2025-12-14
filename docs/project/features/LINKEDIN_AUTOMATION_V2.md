@@ -231,12 +231,12 @@
 **Description**: Extend Google Sheets service for V2 (read subject, write post, set status)
 
 **Tasks**:
-- [ ] Extend `GoogleSheetsService` to access Sheet2
-- [ ] Implement method to read Row 2, Column A (sujet)
-- [ ] Implement method to write Row 2, Column B (post)
-- [ ] Implement method to set Row 2, Column C to "yes"
-- [ ] Handle regeneration (overwrite Column B)
-- [ ] Test reading and writing to Sheet2
+- [x] Extend `GoogleSheetsService` to access Sheet2
+- [x] Implement method to read Row 2, Column A (sujet)
+- [x] Implement method to write Row 2, Column B (post)
+- [x] Implement method to set Row 2, Column C to "yes"
+- [x] Handle regeneration (overwrite Column B)
+- [x] Test reading and writing to Sheet2
 
 **Dependencies**: Step 2 from V1 (Google Sheets Integration)
 
@@ -375,7 +375,7 @@
 - [x] **Step 1**: OpenAI API Integration (2-3 hours) - ✅ COMPLETED
 - [x] **Step 2**: Prompt Template Management (1-2 hours) - ✅ COMPLETED
 - [x] **Step 3**: Post Generation Service (2-3 hours) - ✅ COMPLETED
-- [ ] **Step 4**: Google Sheets V2 Integration (2-3 hours)
+- [x] **Step 4**: Google Sheets V2 Integration (2-3 hours) - ✅ COMPLETED
 - [ ] **Step 5**: Phase 1 Main Application (3-4 hours)
 - [ ] **Step 6**: Phase 1 Testing & Validation (2-3 hours)
 
